@@ -21,7 +21,7 @@ async function getData(age: string, limit: string) {
   };
 
   const res = await fetch(
-    `http://localhost:3000/api/questions?age=${ageValue}&limit=${limitValue}`,
+    `${window.location.origin}/api/questions?age=${ageValue}&limit=${limitValue}`,
     {
       method: "GET",
       headers: {
