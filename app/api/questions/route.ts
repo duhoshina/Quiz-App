@@ -1,4 +1,4 @@
-import { createResponse } from '@/utils/createResponse';
+import { createResponse } from '@/utils/create-response';
 import data from './data.json';
 
 function getAgeParam(request: Request): number | null {
