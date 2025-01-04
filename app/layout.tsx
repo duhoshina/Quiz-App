@@ -7,8 +7,8 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Quizy - Test Your Knowledge!",
-  description: "A Quiz App built using Next JS",
+  title: "Descubra Que Tipo de Homem Você É | Quizz Divertido",
+  description: "Você é o 'Enforca Errado', 'Erra Buraco', 'Bate Fraco', 'Goza e Dorme', 'Empurra Mole' ou 'Geme Fino'? Responda nosso quizz divertido e descubra!",
 };
 
 export default function RootLayout({
@@ -17,7 +17,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="pt-BR" suppressHydrationWarning>
       <body className={inter.className}>
         <ModalProvider />
         <main>{children}</main>

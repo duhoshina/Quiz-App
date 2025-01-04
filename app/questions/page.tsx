@@ -1,21 +1,27 @@
 import Questions from "@/components/questions";
-import { categoryOptions, difficultyOptions } from "@/constants";
-import { redirect } from "next/navigation";
 import "./questions.css";
+import { ageOptions } from "@/constants/age-options";
+import { redirect } from "next/navigation";
 
 export const fetchCache = "force-no-store";
 
 type Props = {
   searchParams: {
-    category: string;
-    difficulty: string;
+    age: string;
     limit: string;
   };
 };
 
-async function getData(category: string, difficulty: string, limit: string) {
+async function getData(age: string, limit: string) {
+  const ageValue = parseInt(age, 10);
+  const limitValue = parseInt(limit, 10);
+
+  if (isNaN(ageValue) || isNaN(limitValue)) {
+    throw new Error("Invalid parameters: 'age' and 'limit' must be valid numbers.");
+  };
+
   const res = await fetch(
-    `https://the-trivia-api.com/api/questions?categories=${category}&limit=${limit}&type=multiple&difficulty=${difficulty}`,
+    `http://localhost:3000/api/questions?age=${ageValue}&limit=${limitValue}`,
     {
       method: "GET",
       headers: {
@@ -24,26 +30,23 @@ async function getData(category: string, difficulty: string, limit: string) {
     }
   );
 
-  if (!res.ok) {
-    throw new Error("Failed to fetch data!");
-  }
+  const data = await res.json();
 
-  return res.json();
+  if (!res.ok) {
+    console.error("Error Details:", data);
+    throw new Error(`Failed to fetch data: ${data.message || res.statusText}`);
+  };
+
+  return data;
 }
 
 const QuestionsPage = async ({ searchParams }: Props) => {
-  const category = searchParams.category as string;
-  const difficulty = searchParams.difficulty;
+  const age = searchParams.age as string;
   const limit = searchParams.limit;
 
-  const validateCategory = (category: string) => {
-    const validCategories = categoryOptions.map((option) => option.value);
-    return validCategories.includes(category);
-  };
-
-  const validateDifficulty = (difficulty: string) => {
-    const validDifficulties = difficultyOptions.map((option) => option.value);
-    return validDifficulties.includes(difficulty);
+  const validateAge = (age: string) => {
+    const validCategories = ageOptions.map((option) => option.value);
+    return validCategories.includes(age);
   };
 
   const validateLimit = (limit: string) => {
@@ -52,20 +55,18 @@ const QuestionsPage = async ({ searchParams }: Props) => {
   };
 
   if (
-    !validateCategory(category) ||
-    !validateDifficulty(difficulty) ||
+    !validateAge(age) ||
     !validateLimit(limit)
   ) {
     return redirect("/");
   }
 
-  const response = await getData(category, difficulty, limit);
+  const response = await getData(age, limit);
 
   return (
     <Questions
-      questions={response}
-      limit={parseInt(limit, 10)}
-      category={category}
+      questions={response.results}
+      limit={response.results.length}
     />
   );
 };

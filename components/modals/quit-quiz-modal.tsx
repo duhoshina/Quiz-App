@@ -11,26 +11,33 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 import useModalStore from "@/hooks/useModalStore";
+import useResultStore from "@/hooks/useResultStore";
 import { useRouter } from "next/navigation";
 
 const QuitQuizModal = () => {
   const { isOpen, type, onClose } = useModalStore();
+  const { resetQuestionsAnswered } = useResultStore();
   const open = isOpen && type === "quitQuiz";
   const router = useRouter();
+
+  const handleQuit = () => {
+    resetQuestionsAnswered();
+    return router.push("/");
+  };
 
   return (
     <AlertDialog open={open} onOpenChange={onClose}>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+          <AlertDialogTitle>Voce tem absoluta certeza?</AlertDialogTitle>
           <AlertDialogDescription>
-            Your progress will be lost.
+            Seu teste sera perdido.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction onClick={() => router.push("/")}>
-            Confirm
+          <AlertDialogCancel>Cancelar</AlertDialogCancel>
+          <AlertDialogAction className="destructive" onClick={handleQuit}>
+            Confirmar
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
