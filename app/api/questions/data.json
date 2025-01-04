@@ -1,47 +1,142 @@
 [
   {
     "id": 1,
-    "question": "Quando você tenta ser dominante, o que geralmente acontece?",
+    "question": "Como você lida com um novo desafio?",
     "options": [
-      { "id": 1, "text": "Faço tudo errado, mas juro que tentei.", "value": "enforcaErrado" },
-      { "id": 2, "text": "Fico confuso no processo.", "value": "erraBuraco" },
-      { "id": 3, "text": "A pessoa nem sente o impacto.", "value": "bateFraco" }
+      { "id": 1, "text": "Encaro com confiança e energia.", "value": "gemeFino" },
+      { "id": 2, "text": "Fico um pouco inseguro, mas tento.", "value": "erraBuraco" },
+      { "id": 3, "text": "Prefiro dar um passo atrás e pensar bem.", "value": "bateFraco" },
+      { "id": 4, "text": "Tento ignorar e seguir em frente.", "value": "gozaDorme" }
     ]
   },
   {
     "id": 2,
-    "question": "Como você reage depois de terminar?",
+    "question": "Quando algo não sai como planejado, como você reage?",
     "options": [
-      { "id": 1, "text": "Já estou babando no travesseiro.", "value": "gozaEDorme" },
-      { "id": 2, "text": "Tento ser prestativo, mas sou um desastre.", "value": "empurraMole" },
-      { "id": 3, "text": "Faço um som que nem eu entendo.", "value": "gemeFino" }
+      { "id": 1, "text": "Eu me esforço mais e tento corrigir.", "value": "gemeFino" },
+      { "id": 2, "text": "Fico frustrado, mas tento uma solução.", "value": "erraBuraco" },
+      { "id": 3, "text": "Tento aceitar e seguir em frente.", "value": "bateFraco" },
+      { "id": 4, "text": "Deixo para lá e tento esquecer.", "value": "gozaDorme" }
     ]
   },
   {
     "id": 3,
-    "question": "Qual é a sua maior dificuldade durante o trabalho em equipe?",
+    "question": "O que você faz quando se sente pressionado?",
     "options": [
-      { "id": 1, "text": "Não consigo ouvir os outros.", "value": "naoEscuto" },
-      { "id": 2, "text": "Eu acabo fazendo tudo sozinho.", "value": "controlaTudo" },
-      { "id": 3, "text": "Eu fico perdido e não sei o que fazer.", "value": "semRumo" }
+      { "id": 1, "text": "Procuro relaxar e manter a calma.", "value": "gemeFino" },
+      { "id": 2, "text": "Sinto que fico mais ansioso, mas tento controlar.", "value": "erraBuraco" },
+      { "id": 3, "text": "Tento fazer o máximo possível, sem me estressar.", "value": "bateFraco" },
+      { "id": 4, "text": "Simplesmente paro e espero o estresse passar.", "value": "gozaDorme" }
     ]
   },
   {
     "id": 4,
-    "question": "Quando você precisa tomar uma decisão difícil, o que costuma fazer?",
+    "question": "Qual é a sua abordagem em situações sociais?",
     "options": [
-      { "id": 1, "text": "Penso demais e acabo não decidindo nada.", "value": "paralisaDecisao" },
-      { "id": 2, "text": "Eu tomo a decisão rápida, mesmo sem pensar muito.", "value": "decisaoImpulsiva" },
-      { "id": 3, "text": "Tento buscar conselhos, mas acabo ficando mais confuso.", "value": "buscaAjuda" }
+      { "id": 1, "text": "Sou extrovertido e gosto de interagir com todos.", "value": "gemeFino" },
+      { "id": 2, "text": "Gosto de observar e falar com quem tenho mais afinidade.", "value": "erraBuraco" },
+      { "id": 3, "text": "Fico mais quieto e prefiro escutar.", "value": "bateFraco" },
+      { "id": 4, "text": "Evito situações sociais quando posso.", "value": "gozaDorme" }
     ]
   },
   {
     "id": 5,
-    "question": "O que você faz quando sente que não está sendo reconhecido?",
+    "question": "Como você se sente em relação a mudanças?",
     "options": [
-      { "id": 1, "text": "Fico quieto e espero que percebam.", "value": "ficaCalado" },
-      { "id": 2, "text": "Dou um jeito de mostrar o meu valor.", "value": "fazAcontecer" },
-      { "id": 3, "text": "Tento trabalhar mais, mas me sinto desmotivado.", "value": "trabalhaMais" }
+      { "id": 1, "text": "Adoro mudanças e novos desafios!", "value": "gemeFino" },
+      { "id": 2, "text": "Fico um pouco nervoso, mas aceito.", "value": "erraBuraco" },
+      { "id": 3, "text": "Prefiro a estabilidade, mas aceito quando necessário.", "value": "bateFraco" },
+      { "id": 4, "text": "Evito mudanças, me sinto desconfortável.", "value": "gozaDorme" }
+    ]
+  },
+  {
+    "id": 6,
+    "question": "Quando você tem que tomar decisões importantes, como age?",
+    "options": [
+      { "id": 1, "text": "Analisando bem todos os prós e contras.", "value": "gemeFino" },
+      { "id": 2, "text": "Faço o que parece certo na hora, sem muita reflexão.", "value": "erraBuraco" },
+      { "id": 3, "text": "Tomo decisões mais conservadoras e ponderadas.", "value": "bateFraco" },
+      { "id": 4, "text": "Evito decisões importantes sempre que posso.", "value": "gozaDorme" }
+    ]
+  },
+  {
+    "id": 7,
+    "question": "Como você lida com feedbacks negativos?",
+    "options": [
+      { "id": 1, "text": "Tento usar para melhorar e crescer.", "value": "gemeFino" },
+      { "id": 2, "text": "Fico um pouco chateado, mas aceito as críticas.", "value": "erraBuraco" },
+      { "id": 3, "text": "Sinto-me desconfortável, mas procuro melhorar.", "value": "bateFraco" },
+      { "id": 4, "text": "Evito situações em que recebo feedbacks negativos.", "value": "gozaDorme" }
+    ]
+  },
+  {
+    "id": 8,
+    "question": "Qual é a sua maior motivação no dia a dia?",
+    "options": [
+      { "id": 1, "text": "Buscar o sucesso e aprender o máximo possível.", "value": "gemeFino" },
+      { "id": 2, "text": "Viver uma vida mais tranquila e equilibrada.", "value": "erraBuraco" },
+      { "id": 3, "text": "Ter tempo para as coisas que amo e as pessoas importantes.", "value": "bateFraco" },
+      { "id": 4, "text": "Relaxar e aproveitar a vida sem preocupações.", "value": "gozaDorme" }
+    ]
+  },
+  {
+    "id": 9,
+    "question": "Como você prefere resolver problemas?",
+    "options": [
+      { "id": 1, "text": "Procurando a solução mais eficaz e rápida.", "value": "gemeFino" },
+      { "id": 2, "text": "Tentando diversas abordagens até encontrar uma solução.", "value": "erraBuraco" },
+      { "id": 3, "text": "Refletindo calmamente até encontrar uma solução.", "value": "bateFraco" },
+      { "id": 4, "text": "Ignorando o problema até que ele se resolva sozinho.", "value": "gozaDorme" }
+    ]
+  },
+  {
+    "id": 10,
+    "question": "Quando você está com dificuldades, o que costuma fazer?",
+    "options": [
+      { "id": 1, "text": "Procurar ajuda e aprender com os outros.", "value": "gemeFino" },
+      { "id": 2, "text": "Persistir e tentar sozinho até conseguir.", "value": "erraBuraco" },
+      { "id": 3, "text": "Tentar manter a calma e buscar alternativas.", "value": "bateFraco" },
+      { "id": 4, "text": "Desistir por um tempo e tentar novamente depois.", "value": "gozaDorme" }
+    ]
+  },
+  {
+    "id": 11,
+    "question": "Como você reage quando seu parceiro está passando por um momento difícil?",
+    "options": [
+      { "id": 1, "text": "Tento ser o mais compreensivo possível e oferecer apoio.", "value": "gemeFino" },
+      { "id": 2, "text": "Fico preocupado, mas prefiro dar espaço.", "value": "erraBuraco" },
+      { "id": 3, "text": "Tento fazer a pessoa rir e distrair para aliviar a tensão.", "value": "bateFraco" },
+      { "id": 4, "text": "Fico sem saber o que fazer e acabo me afastando um pouco.", "value": "gozaDorme" }
+    ]
+  },
+  {
+    "id": 12,
+    "question": "Quando você tem um desentendimento com seu parceiro, como reage?",
+    "options": [
+      { "id": 1, "text": "Procuro entender o ponto de vista dele e chegar a um consenso.", "value": "gemeFino" },
+      { "id": 2, "text": "Fico na defensiva e tento provar meu ponto.", "value": "erraBuraco" },
+      { "id": 3, "text": "Procuro pedir desculpas e seguir em frente o mais rápido possível.", "value": "bateFraco" },
+      { "id": 4, "text": "Tento evitar o conflito e me distancio até tudo se acalmar.", "value": "gozaDorme" }
+    ]
+  },
+  {
+    "id": 13,
+    "question": "Como você demonstra carinho para seu parceiro?",
+    "options": [
+      { "id": 1, "text": "Eu gosto de ser atencioso, fazer surpresas e mostrar meu amor.", "value": "gemeFino" },
+      { "id": 2, "text": "Mostro carinho com pequenos gestos e palavras.", "value": "erraBuraco" },
+      { "id": 3, "text": "Prefiro expressar meu carinho com toques e momentos de proximidade.", "value": "bateFraco" },
+      { "id": 4, "text": "Às vezes, me sinto desconfortável com demonstrações de afeto.", "value": "gozaDorme" }
+    ]
+  },
+  {
+    "id": 14,
+    "question": "Quando seu parceiro te faz uma surpresa, como você reage?",
+    "options": [
+      { "id": 1, "text": "Adoro e fico super empolgado com a surpresa.", "value": "gemeFino" },
+      { "id": 2, "text": "Fico grato, mas tento esconder minha emoção.", "value": "erraBuraco" },
+      { "id": 3, "text": "Aprecio, mas prefiro não demonstrar muito.", "value": "bateFraco" },
+      { "id": 4, "text": "Não sou muito fã de surpresas, me sinto desconfortável.", "value": "gozaDorme" }
     ]
   }
 ]

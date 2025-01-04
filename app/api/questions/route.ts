@@ -16,6 +16,15 @@ function isValidAge(age: number): boolean {
     return age >= 18;
 };
 
+function shuffleArray<T>(array: T[]): T[] {
+    const shuffledArray = [...array];
+    for (let i = shuffledArray.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
+    };
+    return shuffledArray;
+}
+
 export async function GET(request: Request) {
     const url = new URL(request.url);
 
@@ -39,16 +48,18 @@ export async function GET(request: Request) {
             });
         };
 
+        const shuffledQuestions = shuffleArray(data);
+
         if(limitParam) {
             return createResponse(200, {
                 response_code: 0,
-                results: data.slice(0, limitParam),
+                results: shuffledQuestions.slice(0, limitParam),
             });
         };
 
         return createResponse(200, {
             response_code: 0,
-            results: data.slice(0, 5),
+            results: shuffledQuestions.slice(0, 5),
         });
     } catch (error: unknown) {
         if (error instanceof Error) {

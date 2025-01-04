@@ -1,6 +1,7 @@
 import Questions from "@/components/questions";
 import "./questions.css";
 import { ageOptions } from "@/constants/age-options";
+import { redirect } from "next/navigation";
 
 export const fetchCache = "force-no-store";
 
@@ -57,7 +58,7 @@ const QuestionsPage = async ({ searchParams }: Props) => {
     !validateAge(age) ||
     !validateLimit(limit)
   ) {
-    // return redirect("/");
+    return redirect("/");
   }
 
   const response = await getData(age, limit);

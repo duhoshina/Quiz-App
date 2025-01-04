@@ -3,10 +3,10 @@
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Separator } from "@/components/ui/separator";
-import { alphabeticNumeral, showAge } from "@/constants";
+import { alphabeticNumeral } from "@/constants";
 import useModalStore from "@/hooks/useModalStore";
 import useResultStore from "@/hooks/useResultStore";
-import { Question } from "@/types/question";
+import { Question, QuestionOptions } from "@/types/question";
 import { Loader2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
@@ -19,111 +19,111 @@ type Props = {
 
 const Questions = ({ questions, limit }: Props) => {
   const [curr, setCurr] = useState(0);
-  const [answers, setAnswers] = useState<Question['options']>([]);
-  const [selected, setSelected] = useState<string>("");
+  const [selected, setSelected] = useState<string | null>(null);
   const [progressValue, setProgressValue] = useState(0);
   const [score, setScore] = useState(0);
   const { onOpen } = useModalStore();
-  const { questionsAnswered, increaseQuestionAnswered } = useResultStore();
+  const { questionsAnswered, increaseQuestionAnswered, resetQuestionsAnswered } = useResultStore();
   const [key, setKey] = useState(0);
 
-  const handleSelect = (i: string) => {
-    if (selected === i)
-      return "correct";
-  };
+  const currentQuestion = questions[curr];
+  const answers = currentQuestion?.options || [];
 
   const handleNext = () => {
-    setCurr((curr) => curr + 1);
-    setSelected("");
-    setKey((prevKey) => prevKey + 1);
+    setCurr(curr + 1);
+    setSelected(null);
+    setKey(prevKey => prevKey + 1);
   };
 
   const handleQuit = () => {
     onOpen("quitQuiz");
+    resetQuestionsAnswered();
   };
 
   const handleShowResult = () => {
-    onOpen("showResults", {
-      score,
-      limit,
-    });
+    onOpen("showResults", { score, limit });
   };
 
   const handleTimeUp = () => {
-    toast.error("Voce pensou demais!");
+    toast.error("Você pensou demais!");
+  };
+
+  const handleAnswerClick = (answerValue: string, index: number) => () => {
+    setSelected(answerValue);
+    updateScore(answerValue);
+    if (answerValue) {
+      increaseQuestionAnswered({
+        question: {
+          id: currentQuestion.id,
+          question: currentQuestion.question,
+        },
+        userAnswer: answerValue as QuestionOptions["value"],
+      });
+    }
+  };
+
+  const updateScore = (answerValue: string) => {
+    if (answerValue) {
+      setScore(prevScore => prevScore + 1);
+    };
   };
 
   useEffect(() => {
-    setAnswers(questions[curr].options)
-    setProgressValue((100 / limit) * (curr + 1));
-  }, [curr, questions, limit]);
+    if (currentQuestion) {
+      setProgressValue((100 / limit) * (curr + 1));
+    }
+  }, [curr, limit, currentQuestion]);
 
-  if (!questions) {
+  if (!questions.length) {
     return <Loader2 className="size-10 text-white animate-spin" />;
-  };
-
-  console.log(questionsAnswered)
+  }
 
   return (
     <div className="bg-white px-3 py-5 md:p-6 shadow-md w-full md:w-[80%] lg:w-[70%] max-w-5xl sm:rounded-lg">
       <Progress value={progressValue} />
       <div className="flex justify-between items-center h-20 text-sm md:text-base">
         <div className="space-y-1">
-          <p>Score: {score}</p>
+          <p>Respostas: {score}/{limit}</p>
         </div>
         <CountdownCircleTimer
           key={key}
           isPlaying={!selected}
-          duration={6}
+          duration={25}
           size={45}
           strokeWidth={4}
           colors={["#004777", "#F7B801", "#A30000", "#A30000"]}
-          colorsTime={[6, 4, 2, 0]}
+          colorsTime={[15, 20, 5, 0]}
           onComplete={handleTimeUp}
         >
-          {({ remainingTime }) => (
-            <div className="text-center">{remainingTime}</div>
-          )}
+          {({ remainingTime }) => <div className="text-center">{remainingTime}</div>}
         </CountdownCircleTimer>
       </div>
       <Separator />
       <div className="min-h-[50vh] py-4 xl:py-8 px-3 md:px-5 w-full">
-        <h2 className="text-2xl text-center font-medium">{`Q${curr + 1}. ${
-          questions[curr].question
-        }`}</h2>
+        <h2 className="text-2xl text-center font-medium">
+          {`Q${curr + 1}. ${currentQuestion?.question}`}
+        </h2>
         <div className="py-4 md:py-5 xl:py-7 flex flex-col gap-y-3 md:gap-y-5">
           {answers.map((answer, i) => (
             <button
               key={i}
-              className={`option`}
+              className={`option ${selected === answer.value ? 'correct' : ''}`}
               disabled={!!selected}
-              onClick={() => {
-                setSelected(answer.value);
-                increaseQuestionAnswered({ 
-                  question: questions[curr],
-                  userAnswer: answer.value
-                });
-              }}
+              onClick={handleAnswerClick(answer.value, i)}
             >
-              {alphabeticNumeral(i)}
-              {answer.text}
+              {alphabeticNumeral(i)} {answer.text}
             </button>
           ))}
         </div>
-        { questionsAnswered.map((item, i) => (
-          <p key={i}>Resposta escolhida: {questionsAnswered[i].userAnswer}</p>
-        ))}
         <Separator />
         <div className="flex mt-5 md:justify-between md:flex-row flex-col gap-4 md:gap-0 mx-auto max-w-xs w-full">
           <Button
             disabled={!selected}
-            onClick={() =>
-              questions.length === curr + 1 ? handleShowResult() : handleNext()
-            }
+            onClick={() => (curr + 1 === questions.length ? handleShowResult() : handleNext())}
           >
-            {questions.length - 1 != curr ? "Proxima Pergunta" : "Ver Resultado"}
+            {curr + 1 < questions.length ? "Próxima Pergunta" : "Ver Resultado"}
           </Button>
-          <Button variant={"destructive"} onClick={handleQuit}>
+          <Button variant="destructive" onClick={handleQuit}>
             Encerrar Teste
           </Button>
         </div>

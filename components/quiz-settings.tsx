@@ -15,7 +15,7 @@ import { ageOptions } from "@/constants/age-options";
 const QuizSettings = () => {
   const router = useRouter();
   const [age, setCategory] = useState<string>("");
-  const [limit, setLimit] = useState([10]);
+  const [limit, setLimit] = useState([5]);
 
   const handleQuizStart = () => {
     router.push(
@@ -43,9 +43,9 @@ const QuizSettings = () => {
       <Slider
         value={limit}
         onValueChange={(value) => setLimit(value)}
-        max={50}
-        step={5}
-        min={5}
+        max={10}
+        step={1}
+        min={3}
         className="w-full md:max-w-xs xl:max-w-md"
       />
       <Button disabled={!age} onClick={handleQuizStart}>

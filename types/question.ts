@@ -1,7 +1,7 @@
 export type QuestionOptions = {
   id: number,
   text: string,
-  value: string
+  value: "gemeFino" | "empurraMole" | "erraBuraco" | "bateFraco" | "enforcaErrado" | "gozaDorme"
 };
 
 export type Question = {
