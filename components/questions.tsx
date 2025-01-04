@@ -3,63 +3,33 @@
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Separator } from "@/components/ui/separator";
-import { alphabeticNumeral, showCategory } from "@/constants";
+import { alphabeticNumeral, showAge } from "@/constants";
 import useModalStore from "@/hooks/useModalStore";
+import useResultStore from "@/hooks/useResultStore";
+import { Question } from "@/types/question";
 import { Loader2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
 import { toast } from "sonner";
 
 type Props = {
-  questions: {
-    category: string;
-    id: string;
-    correctAnswer: string;
-    incorrectAnswers: string[];
-    question: string;
-    tags: string[];
-    type: string;
-    difficulty: string;
-    regions: [];
-    isNiche: boolean;
-  }[];
+  questions: Question[];
   limit: number;
-  category: string;
 };
 
-const Questions = ({ questions, limit, category }: Props) => {
+const Questions = ({ questions, limit }: Props) => {
   const [curr, setCurr] = useState(0);
-  const [answers, setAnswers] = useState<string[]>([]);
+  const [answers, setAnswers] = useState<Question['options']>([]);
   const [selected, setSelected] = useState<string>("");
   const [progressValue, setProgressValue] = useState(0);
   const [score, setScore] = useState(0);
   const { onOpen } = useModalStore();
+  const { questionsAnswered, increaseQuestionAnswered } = useResultStore();
   const [key, setKey] = useState(0);
 
-  const handleShuffle = (correctAnswer: string, incorrectAnswers: string[]) => {
-    const shuffledAnswers = [...incorrectAnswers];
-
-    shuffledAnswers.sort(() => Math.random() - 0.5);
-    const randomIndex = Math.floor(
-      Math.random() * (shuffledAnswers.length + 1)
-    );
-    shuffledAnswers.splice(randomIndex, 0, correctAnswer);
-
-    return shuffledAnswers;
-  };
-
-  const handleCheck = (answer: string, isTimeUp: boolean = false) => {
-    setSelected(answer);
-    if (answer === questions[curr].correctAnswer && !isTimeUp)
-      setScore(score + 1);
-  };
-
   const handleSelect = (i: string) => {
-    if (selected === i && selected === questions[curr].correctAnswer)
+    if (selected === i)
       return "correct";
-    else if (selected === i && selected !== questions[curr].correctAnswer)
-      return "incorrect";
-    else if (i === questions[curr].correctAnswer) return "correct";
   };
 
   const handleNext = () => {
@@ -80,42 +50,35 @@ const Questions = ({ questions, limit, category }: Props) => {
   };
 
   const handleTimeUp = () => {
-    handleCheck(questions[curr].correctAnswer, true);
-    toast.info("You ran out of Time!");
+    toast.error("Voce pensou demais!");
   };
 
   useEffect(() => {
-    if (questions?.length >= 5) {
-      setAnswers(
-        handleShuffle(
-          questions[curr].correctAnswer,
-          questions[curr].incorrectAnswers
-        )
-      );
-    }
+    setAnswers(questions[curr].options)
     setProgressValue((100 / limit) * (curr + 1));
   }, [curr, questions, limit]);
 
-  if (!questions || !answers.length) {
+  if (!questions) {
     return <Loader2 className="size-10 text-white animate-spin" />;
-  }
+  };
+
+  console.log(questionsAnswered)
 
   return (
     <div className="bg-white px-3 py-5 md:p-6 shadow-md w-full md:w-[80%] lg:w-[70%] max-w-5xl sm:rounded-lg">
       <Progress value={progressValue} />
       <div className="flex justify-between items-center h-20 text-sm md:text-base">
         <div className="space-y-1">
-          <p>Category: {showCategory(category)}</p>
           <p>Score: {score}</p>
         </div>
         <CountdownCircleTimer
           key={key}
           isPlaying={!selected}
-          duration={15}
+          duration={6}
           size={45}
           strokeWidth={4}
           colors={["#004777", "#F7B801", "#A30000", "#A30000"]}
-          colorsTime={[15, 8, 3, 0]}
+          colorsTime={[6, 4, 2, 0]}
           onComplete={handleTimeUp}
         >
           {({ remainingTime }) => (
@@ -132,15 +95,24 @@ const Questions = ({ questions, limit, category }: Props) => {
           {answers.map((answer, i) => (
             <button
               key={i}
-              className={`option ${selected && handleSelect(answer)}`}
+              className={`option`}
               disabled={!!selected}
-              onClick={() => handleCheck(answer)}
+              onClick={() => {
+                setSelected(answer.value);
+                increaseQuestionAnswered({ 
+                  question: questions[curr],
+                  userAnswer: answer.value
+                });
+              }}
             >
               {alphabeticNumeral(i)}
-              {answer}
+              {answer.text}
             </button>
           ))}
         </div>
+        { questionsAnswered.map((item, i) => (
+          <p key={i}>Resposta escolhida: {questionsAnswered[i].userAnswer}</p>
+        ))}
         <Separator />
         <div className="flex mt-5 md:justify-between md:flex-row flex-col gap-4 md:gap-0 mx-auto max-w-xs w-full">
           <Button
@@ -149,10 +121,10 @@ const Questions = ({ questions, limit, category }: Props) => {
               questions.length === curr + 1 ? handleShowResult() : handleNext()
             }
           >
-            {questions.length - 1 != curr ? "Next Question" : "Show Results"}
+            {questions.length - 1 != curr ? "Proxima Pergunta" : "Ver Resultado"}
           </Button>
           <Button variant={"destructive"} onClick={handleQuit}>
-            Quit Quiz
+            Encerrar Teste
           </Button>
         </div>
       </div>

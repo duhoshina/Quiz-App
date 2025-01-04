@@ -1,0 +1,47 @@
+[
+  {
+    "id": 1,
+    "question": "Quando você tenta ser dominante, o que geralmente acontece?",
+    "options": [
+      { "id": 1, "text": "Faço tudo errado, mas juro que tentei.", "value": "enforcaErrado" },
+      { "id": 2, "text": "Fico confuso no processo.", "value": "erraBuraco" },
+      { "id": 3, "text": "A pessoa nem sente o impacto.", "value": "bateFraco" }
+    ]
+  },
+  {
+    "id": 2,
+    "question": "Como você reage depois de terminar?",
+    "options": [
+      { "id": 1, "text": "Já estou babando no travesseiro.", "value": "gozaEDorme" },
+      { "id": 2, "text": "Tento ser prestativo, mas sou um desastre.", "value": "empurraMole" },
+      { "id": 3, "text": "Faço um som que nem eu entendo.", "value": "gemeFino" }
+    ]
+  },
+  {
+    "id": 3,
+    "question": "Qual é a sua maior dificuldade durante o trabalho em equipe?",
+    "options": [
+      { "id": 1, "text": "Não consigo ouvir os outros.", "value": "naoEscuto" },
+      { "id": 2, "text": "Eu acabo fazendo tudo sozinho.", "value": "controlaTudo" },
+      { "id": 3, "text": "Eu fico perdido e não sei o que fazer.", "value": "semRumo" }
+    ]
+  },
+  {
+    "id": 4,
+    "question": "Quando você precisa tomar uma decisão difícil, o que costuma fazer?",
+    "options": [
+      { "id": 1, "text": "Penso demais e acabo não decidindo nada.", "value": "paralisaDecisao" },
+      { "id": 2, "text": "Eu tomo a decisão rápida, mesmo sem pensar muito.", "value": "decisaoImpulsiva" },
+      { "id": 3, "text": "Tento buscar conselhos, mas acabo ficando mais confuso.", "value": "buscaAjuda" }
+    ]
+  },
+  {
+    "id": 5,
+    "question": "O que você faz quando sente que não está sendo reconhecido?",
+    "options": [
+      { "id": 1, "text": "Fico quieto e espero que percebam.", "value": "ficaCalado" },
+      { "id": 2, "text": "Dou um jeito de mostrar o meu valor.", "value": "fazAcontecer" },
+      { "id": 3, "text": "Tento trabalhar mais, mas me sinto desmotivado.", "value": "trabalhaMais" }
+    ]
+  }
+]
