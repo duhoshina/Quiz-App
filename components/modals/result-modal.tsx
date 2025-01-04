@@ -69,7 +69,9 @@ const ResultModal = () => {
     descriptions[resultCategory as ResultCategory] ||
     { title: "Resultado Desconhecido", description: "Não foi possível determinar o seu resultado. Tente novamente.", icon: <LuUserRoundCheck className="text-gray-500" /> };
 
-  const shareMessage = encodeURIComponent(`Olha meu resultado: ${resultDescription.title}! ${resultDescription.description}`);
+  const shareMessage = encodeURIComponent(
+    `Eu sou ${resultDescription.title} e quero saber qual é o seu!. Confira: https://tipodehomem.vercel.app/?utm_source=whatsapp&utm_medium=share&utm_campaign=resultados`
+  );
 
   return (
     <Dialog open={open} onOpenChange={onClose}>
