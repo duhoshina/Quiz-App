@@ -2,6 +2,7 @@ import Questions from "@/components/questions";
 import "./questions.css";
 import { ageOptions } from "@/constants/age-options";
 import { redirect } from "next/navigation";
+import { getDomain } from "@/utils/get-domain";
 
 export const fetchCache = "force-no-store";
 
@@ -20,8 +21,10 @@ async function getData(age: string, limit: string) {
     throw new Error("Invalid parameters: 'age' and 'limit' must be valid numbers.");
   };
 
+  const domain = getDomain();
+
   const res = await fetch(
-    `http://localhost:3000/api/questions?age=${ageValue}&limit=${limitValue}`,
+    `${domain}/api/questions?age=${ageValue}&limit=${limitValue}`,
     {
       method: "GET",
       headers: {
